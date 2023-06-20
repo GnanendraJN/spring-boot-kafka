@@ -1,5 +1,6 @@
 package org.learn.microservice.rest.controller;
 
+import jakarta.validation.Valid;
 import org.learn.microservice.rest.dto.UserDto;
 import org.learn.microservice.rest.exception.ErrorDetails;
 import org.learn.microservice.rest.exception.ResourceNotFoundException;
@@ -39,8 +40,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
-
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
 
         UserDto user = userService.createUser(userDto);
 
@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserDto updateUser(@RequestBody UserDto userDto, @PathVariable int id ){
+    public UserDto updateUser(@Valid @RequestBody UserDto userDto, @PathVariable int id ){
 
         userDto.setId(id);
         UserDto updatedUser = userService.updateUser(userDto);
