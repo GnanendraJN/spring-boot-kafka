@@ -1,5 +1,8 @@
 package org.learn.microservice.rest.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.learn.microservice.rest.dto.UserDto;
 import org.learn.microservice.rest.exception.ErrorDetails;
@@ -16,6 +19,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Tag(
+        name = "CRUD REST APIs for User Resource",
+        description = "CRUD REST APIs for User Resource"
+)
 @RestController
 @RequestMapping("api/users")
 public class UserController {
@@ -25,6 +32,13 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Operation(
+            summary = "Get User By Id"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status 200 CREATED"
+    )
     @GetMapping("{id}")
     public UserDto getUserById(@PathVariable int id){
         UserDto userDto = userService.getUserById(id).orElseThrow(
